@@ -1,10 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import App from "./Components/App";
 
-ReactDOM.render(
-  <>
-    <h1> E-commerce </h1>
-  </>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));
