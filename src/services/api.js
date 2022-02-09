@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://e-commerce-sartoria-brasil.herokuapp.com/';
+const BASE_URL = 'https://e-commerce-sartoria-brasil.herokuapp.com';
 
 
 async function createUser(user) {
