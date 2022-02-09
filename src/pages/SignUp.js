@@ -1,8 +1,12 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Container, Header, Form, Input, Button } from "./Components.js"
+import api from "../services/api.js"
 
 
 export default function SignUp() {
+    const navigate = useNavigate()
+
     const [formData, setFormData] = useState({
         name:'',
         email:'',
@@ -14,10 +18,24 @@ export default function SignUp() {
         setFormData({ ...formData, [target.name]: target.value })
     }
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
 
-        console.log(formData)
+        if (formData.password !== formData.confirmPassword) {
+            alert("As senhas devem ser iguais")
+            return
+        }
+      
+        const user = { ...formData }
+        delete user.confirmPassword
+      
+        try {
+            await api.createUser(user)
+            navigate('/')
+        } catch (error) {
+            console.log(error)
+            alert("Erro, tente novamente")
+        }
     }
 
     return(
