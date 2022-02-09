@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'mongodb+srv://e-commerce:admin@cluster0.znct4.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const BASE_URL = 'https://e-commerce-sartoria-brasil.herokuapp.com/';
 
 
 async function createUser(user) {
