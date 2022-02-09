@@ -1,17 +1,15 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { Container, Header, Form, Input, Button } from "./Components.js"
-import api from "../services/api.js"
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../services/api.js";
 
+import { Container, Header, Form, Input, Button } from "./Components.js";
 
 export default function SignUp() {
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
-        name:'',
         email:'',
-        password:'',
-        confirmPassword:''
+        password:''
     })
 
     function handleChange({ target }) {
@@ -20,18 +18,12 @@ export default function SignUp() {
 
     async function handleSubmit(e){
         e.preventDefault()
-
-        if (formData.password !== formData.confirmPassword) {
-            alert("As senhas devem ser iguais")
-            return
-        }
       
         const user = { ...formData }
-        delete user.confirmPassword
-      
+
         try {
-            await api.createUser(user)
-            navigate('/login')
+            await api.login(user)
+            navigate('/')
         } catch (error) {
             console.log(error)
             alert("Erro, tente novamente")
@@ -47,13 +39,6 @@ export default function SignUp() {
             </Header>
             <Form>
                 <Input
-                    value={formData.name}
-                    placeholder="Nome completo"
-                    name="name"
-                    type="text"
-                    onChange={(e) => handleChange(e)}
-                />
-                <Input
                     value={formData.email}
                     placeholder="Email"
                     name="email"
@@ -67,14 +52,7 @@ export default function SignUp() {
                     type="password"
                     onChange={(e) => handleChange(e)}
                 />
-                <Input
-                    value={formData.confirmPassword}
-                    placeholder="Confirme a senha"
-                    name="confirmPassword"
-                    type="password"
-                    onChange={(e) => handleChange(e)}
-                />
-                <Button onClick={handleSubmit} type="submit">Cadastrar</Button>
+                <Button onClick={handleSubmit} type="submit">Entrar</Button>
             </Form>
         </Container>
         </>
