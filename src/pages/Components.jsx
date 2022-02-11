@@ -240,6 +240,13 @@ const CartHeader = styled.div`
   }
 `;
 
+const BannerContainer = styled.div`
+  display: flex;
+  flex-direction: colunmn;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
 function NavHeader() {
   const navigate = useNavigate();
 
@@ -274,4 +281,5 @@ export {
   Product,
   NavHeader,
   CartHeader,
+  BannerContainer,
 };
