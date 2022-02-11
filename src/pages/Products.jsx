@@ -32,6 +32,7 @@ export default function Products() {
   const price = Dinero({
     amount: parseInt(product.price),
     currency: "BRL",
+    precision: 2,
   }).toFormat("$0,0.00");
   return (
     <Container>
