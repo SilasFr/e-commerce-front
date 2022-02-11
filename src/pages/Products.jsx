@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Container, NavHeader, Product } from "./Components";
 import api from "../services/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Dinero from "dinero.js";
 
 export default function Products() {
@@ -9,6 +9,7 @@ export default function Products() {
   const [product, setProduct] = useState();
   const [size, setSize] = useState("");
   const [qty, setQty] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const promise = api.getSingleProduct(params);

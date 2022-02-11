@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
 
@@ -216,14 +217,44 @@ const Product = styled.div`
   }
 `;
 
+const CartHeader = styled.div`
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 30px;
+  width: 100%;
+  height: 60px;
+  background-color: #fcfcf7;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
+
+  color: #91613a;
+
+  ion-icon {
+    font-size: 25px;
+  }
+  p {
+    font-size: 20px;
+  }
+`;
+
 function NavHeader() {
+  const navigate = useNavigate();
+
   return (
     <Header>
       <div className="nav">
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
-        <div className="cart">
+        <div
+          className="cart"
+          onClick={() => {
+            navigate("/cart");
+          }}
+        >
           <ion-icon name="cart"></ion-icon>
         </div>
         <div className="menu">
@@ -234,4 +265,13 @@ function NavHeader() {
   );
 }
 
-export { Container, Header, Form, Input, Button, Product, NavHeader };
+export {
+  Container,
+  Header,
+  Form,
+  Input,
+  Button,
+  Product,
+  NavHeader,
+  CartHeader,
+};
