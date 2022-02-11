@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import logo from "../assets/logo.png";
 
 const Header = styled.div`
   width: 100%;
@@ -8,7 +9,7 @@ const Header = styled.div`
   align-items: center;
 
   background-color: #fcfcf7;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
 
   padding: 0px 20px;
 
@@ -16,6 +17,33 @@ const Header = styled.div`
   position: fixed;
   top: 0;
   z-index: 1;
+  .nav {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    .logo {
+      width: 40px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      img {
+        width: 100%;
+      }
+    }
+    .cart {
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+    }
+    .menu {
+      display: flex;
+      align-items: center;
+      font-size: 30px;
+    }
+  }
 `;
 const Container = styled.div`
   padding-top: 60px;
@@ -188,4 +216,22 @@ const Product = styled.div`
   }
 `;
 
-export { Container, Header, Form, Input, Button, Product };
+function NavHeader() {
+  return (
+    <Header>
+      <div className="nav">
+        <div className="logo">
+          <img src={logo} alt="logo" />
+        </div>
+        <div className="cart">
+          <ion-icon name="cart"></ion-icon>
+        </div>
+        <div className="menu">
+          <ion-icon name="menu"></ion-icon>
+        </div>
+      </div>
+    </Header>
+  );
+}
+
+export { Container, Header, Form, Input, Button, Product, NavHeader };
