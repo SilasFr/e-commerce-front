@@ -32,7 +32,6 @@ export default function SignUp() {
       await api.createUser(user);
       navigate("/login");
     } catch (error) {
-      console.log(error);
       alert("Erro, tente novamente");
     }
   }

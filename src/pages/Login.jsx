@@ -25,8 +25,7 @@ export default function SignUp() {
       await api.login(user);
       navigate("/");
     } catch (error) {
-      console.log(error);
-      alert("Erro, tente novamente");
+      alert("Erro, tente novamente", error);
     }
   }
 

@@ -14,11 +14,10 @@ export default function Products() {
   useEffect(() => {
     const promise = api.getSingleProduct(params);
     promise.then((response) => {
-      console.log(response.data);
       setProduct(response.data);
     });
     promise.catch((error) => {
-      console.log(error);
+      alert(error);
     });
   }, [params]);
 
