@@ -8,8 +8,28 @@ export default function Cart() {
 
   useEffect(() => {
     const checkout = localStorage.getItem("checkout");
-    console.log(checkout);
+    setCart(JSON.parse(checkout));
   });
+  if (!cart) {
+    return (
+      <Container>
+        <CartHeader>
+          <ion-icon
+            name="arrow-dropleft"
+            onClick={() => {
+              navigate(-1);
+            }}
+          ></ion-icon>
+          <p>Carrinho de compras</p>
+        </CartHeader>
+
+        <div className="cart">
+          <p>O CARRINHO DE COMPRAS ESTÁ VAZIO</p>
+        </div>
+      </Container>
+    );
+  }
+  console.log(cart);
   return (
     <Container>
       <CartHeader>
@@ -23,7 +43,9 @@ export default function Cart() {
       </CartHeader>
 
       <div className="cart">
-        <p>O CARRINHO DE COMPRAS ESTÁ VAZIO</p>
+        <p>{cart.name}</p>
+        <p>{cart.price}</p>
+        <p>{cart.qty}</p>
       </div>
     </Container>
   );
