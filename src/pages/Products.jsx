@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Container, Header, Product } from "./Components";
 import api from "../services/api";
 import { useParams } from "react-router-dom";
+import Dinero from "dinero.js";
 
 export default function Products() {
   const params = useParams();
@@ -28,6 +29,10 @@ export default function Products() {
   if (!product) {
     return <h1>Carregando</h1>;
   }
+  const price = Dinero({
+    amount: parseInt(product.price),
+    currency: "BRL",
+  }).toFormat("$0,0.00");
   return (
     <Container>
       <Header></Header>
@@ -40,7 +45,7 @@ export default function Products() {
           <div className="tag">
             <div className="header">
               <p className="name">{product.name}</p>
-              <p className="price">R$ 99,99</p>
+              <p className="price">{price}</p>
             </div>
             <div className="horizontal-divider"></div>
 
