@@ -1,8 +1,15 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartHeader, Container } from "./Components";
 
 export default function Cart() {
   const navigate = useNavigate();
+  const [cart, setCart] = useState();
+
+  useEffect(() => {
+    const checkout = localStorage.getItem("checkout");
+    console.log(checkout);
+  });
   return (
     <Container>
       <CartHeader>

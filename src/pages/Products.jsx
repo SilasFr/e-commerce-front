@@ -35,7 +35,7 @@ export default function Products() {
       size,
       qty,
     });
-    localStorage.setItem(checkout);
+    localStorage.setItem("checkout", checkout);
     navigate("/cart");
   }
   if (!product) {
