@@ -20,7 +20,7 @@ export default function Products() {
     promise.catch((error) => {
       console.log(error);
     });
-  }, []);
+  }, [params]);
 
   function handleSizeClick(e) {
     if (size === e.target.innerText) {
@@ -31,11 +31,13 @@ export default function Products() {
   }
 
   function handleBuy() {
-    const checkout = {
+    const checkout = JSON.stringify({
       ...product,
       size,
       qty,
-    };
+    });
+    localStorage.setItem(checkout);
+    navigate("/cart");
   }
   if (!product) {
     return <h1>Carregando</h1>;
