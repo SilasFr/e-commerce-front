@@ -1,32 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CartHeader, Container } from "./Components";
+import CartRender from "./CartRender";
+import { CartBody, CartHeader, Container } from "./Components";
 
 export default function Cart() {
   const navigate = useNavigate();
   const [cart, setCart] = useState();
 
   useEffect(() => {
-    const checkout = localStorage.getItem("checkout");
-    setCart(JSON.parse(checkout));
+    setCart(JSON.parse(localStorage.getItem("checkout")));
   }, []);
   if (!cart) {
     return (
-      <Container>
-        <CartHeader>
-          <ion-icon
-            name="arrow-dropleft"
-            onClick={() => {
-              navigate(-1);
-            }}
-          ></ion-icon>
-          <p>Carrinho de compras</p>
-        </CartHeader>
-
-        <div className="cart">
-          <p>O CARRINHO DE COMPRAS ESTÁ VAZIO</p>
-        </div>
-      </Container>
+      <div className="cart">
+        <p>O CARRINHO DE COMPRAS ESTÁ VAZIO</p>
+      </div>
     );
   }
   console.log(cart);
@@ -42,11 +30,9 @@ export default function Cart() {
         <p>Carrinho de compras</p>
       </CartHeader>
 
-      <div className="cart">
-        <p>{cart.name}</p>
-        <p>{cart.price}</p>
-        <p>{cart.qty}</p>
-      </div>
+      <CartBody>
+        <CartRender cart={cart} setCart={setCart} />
+      </CartBody>
     </Container>
   );
 }

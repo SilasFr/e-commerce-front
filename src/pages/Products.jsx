@@ -30,6 +30,10 @@ export default function Products() {
   }
 
   function handleBuy() {
+    if (!size) {
+      alert("Selecione o tamanho primeiro!");
+      return;
+    }
     const checkout = JSON.stringify({
       ...product,
       size,
