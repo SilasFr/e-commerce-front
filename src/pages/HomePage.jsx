@@ -1,106 +1,99 @@
-import { Container, Header, Button } from "./Components";
+import { Container, Button, NavHeader } from "./Components.jsx";
 import styled from "styled-components";
-import logo from "../assets/logo.png"
+import api from "../services/api.js";
+import { useEffect, useState } from 'react'
+import Dinero from "dinero.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+    // passar a categoria do produto e o id no onClick - ok
+    // header não está exatamente fixo no topo, não sei o que tá rolando - ok
+    // parece estar acontecendo algo estranho, se der scroll pro lado a tela se move - ok
+    // context pra passar o token
+
+    const [products, setProducts] = useState([])
+    const navigate = useNavigate()
+
+    function categorizeObject(array, category){
+        const categorizedObjectsArray = array.map(object => ({
+            ...object,
+            category: category
+        }))
+
+        return categorizedObjectsArray
+    }
+
+    useEffect(() => {
+        const promisse = api.getProducts()
+        promisse.then((response) => {
+            const shoes = categorizeObject(response.data[0].products.slice(0,3), "shoes")
+            const shirts = categorizeObject(response.data[1].products.slice(0,3), "shirts")
+            const jackets = categorizeObject(response.data[2].products.slice(0,4), "jackets")
+            const products = [...shoes, ...shirts, ...jackets]
+            setProducts(products)
+        })
+        promisse.catch((error) => {
+            console.log(error)
+        })
+    }, [])
+
+    function priceFormatter(number) {
+        const price = Dinero({
+            amount: parseInt(number),
+            currency: "BRL",
+            precision: 2,
+          })
+        .toFormat("$0,0.00")
+        .replace(".", ",");
+
+        return price
+    }
+
+    function handleClick(category, id, event) {
+        event.preventDefault()
+
+        navigate(`/product/${category}/${id}`)
+    }
+
     return (
         <>
             <Container>
-                <Header>
-                    <Right>
-                        <img src={logo} alt="sartoria brasil" />
-                    </Right>
-                    <Left>
-                        <ion-icon name="cart-outline"></ion-icon>
-                        <ion-icon name="menu-outline"></ion-icon>
-                    </Left>
-                </Header>
+                <NavHeader></NavHeader>
                 <Banners>
                     <Banner>
                         <img src="https://picsum.photos/400/300/?blur" alt="shoes" />
-                        <div className="textImage">Shoes</div>
+                        <div className="textImage">SHOES</div>
                     </Banner>
                     <Banner>
                         <img src="https://picsum.photos/400/300/?blur" alt="shoes" />
-                        <div className="textImage">Shoes</div>
+                        <div className="textImage">SHIRTS</div>
                     </Banner>
                     <Banner>
                         <img src="https://picsum.photos/400/300/?blur" alt="shoes" />
-                        <div className="textImage">Shoes</div>
+                        <div className="textImage">JACKETS</div>
                     </Banner>
                     <Products>
-                        <Product>
-                            <img src="http://picsum.photos/150/150" alt="product" />
-                            <div className="product-name">
-                                CAMISETA TAL
-                            </div>
-                            <div className="product-price">
-                                R$50,00
-                            </div>
-                            <div className="product-price-2">
-                                <span>10</span>X DE <span>R$5,00</span>
-                            </div>
-                        </Product>
-                        <Product>
-                            <img src="http://picsum.photos/150/150" alt="product" />
-                            <div className="product-name">
-                                CAMISETA TAL
-                            </div>
-                            <div className="product-price">
-                                R$50,00
-                            </div>
-                            <div className="product-price-2">
-                                <span>10</span>X DE <span>R$5,00</span>
-                            </div>
-                        </Product>
-                        <Product>
-                            <img src="http://picsum.photos/150/150" alt="product" />
-                            <div className="product-name">
-                                CAMISETA TAL
-                            </div>
-                            <div className="product-price">
-                                R$50,00
-                            </div>
-                            <div className="product-price-2">
-                                <span>10</span>X DE <span>R$5,00</span>
-                            </div>
-                        </Product>
-                        <Product>
-                            <img src="http://picsum.photos/150/150" alt="product" />
-                            <div className="product-name">
-                                CAMISETA TAL
-                            </div>
-                            <div className="product-price">
-                                R$50,00
-                            </div>
-                            <div className="product-price-2">
-                                <span>10</span>X DE <span>R$5,00</span>
-                            </div>
-                        </Product>
-                        <Product>
-                            <img src="http://picsum.photos/150/150" alt="product" />
-                            <div className="product-name">
-                                CAMISETA TAL
-                            </div>
-                            <div className="product-price">
-                                R$50,00
-                            </div>
-                            <div className="product-price-2">
-                                <span>10</span>X DE <span>R$5,00</span>
-                            </div>
-                        </Product>
-                        <Product>
-                            <img src="http://picsum.photos/150/150" alt="product" />
-                            <div className="product-name">
-                                CAMISETA TAL
-                            </div>
-                            <div className="product-price">
-                                R$50,00
-                            </div>
-                            <div className="product-price-2">
-                                <span>10</span>X DE <span>R$5,00</span>
-                            </div>
-                        </Product>
+                        {console.log(products)}
+                        {
+                            products.map(product => {
+                                return(
+                                    <Product onClick={(e) => handleClick(product.category, product.id, e)}>
+                                        <img src={product.url} alt={product.name} />
+                                        <div className="product-info">
+                                            <div className="product-name">
+                                                {product.name}
+                                            </div>
+                                            <div className="product-price">
+                                                {priceFormatter(product.price)}
+                                            </div>
+                                            <div className="product-price-2">
+                                                <span>10</span>X DE <span>{priceFormatter(product.price / 10)}</span>
+                                            </div>
+                                        </div>
+                                    </Product>
+                                )
+                            })
+                        }
                     </Products>
                     <Button>VER TODOS OS PRODUTOS</Button>
                     <Footer>
@@ -110,10 +103,9 @@ export default function Home() {
                             </div>
 
                             <div className="links">
-                                <a href="/">home</a>
-                                <a href="/">produtos</a>
-                                <a href="/">contato</a>
-                                <a href="/">perguntas frequentes</a>
+                                <a href="/home">home</a>
+                                <a href="/all-products">produtos</a>
+                                <a href="/contact-us">contato</a>
                             </div>
                         </div>
                         <div className="payment-methods">
@@ -122,13 +114,8 @@ export default function Home() {
                             </div>
 
                             <div className="methods">
-                                <img src="https://picsum.photos/40/30" alt="boleto" />
-                                <img src="https://picsum.photos/40/30" alt="boleto" />
-                                <img src="https://picsum.photos/40/30" alt="boleto" />
-                                <img src="https://picsum.photos/40/30" alt="boleto" />
-                                <img src="https://picsum.photos/40/30" alt="boleto" />
-                                <img src="https://picsum.photos/40/30" alt="boleto" />
-                                <img src="https://picsum.photos/40/30" alt="boleto" />
+                                <img src="https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/visa@2x.png" alt="visa" />
+                                <img src="https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/mastercard@2x.png" alt="mastercard" />
                             </div>
                         </div>
                         <div className="contact">
@@ -148,25 +135,8 @@ export default function Home() {
     )
 }
 
-const Left = styled.div`
-    display: flex;
-    gap: 15px;
-
-    ion-icon{
-        font-size: 34px;
-    }
-`
-const Right = styled.div`
-    display: flex;
-
-    img{
-        height: 60px;
-    }
-`
-
 const Banners = styled.div`
-    width: 100%;
-
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -177,6 +147,7 @@ const Banners = styled.div`
 `
 
 const Banner = styled.div`
+    width: 100vw;
     position: relative;
     text-align: center;
 
@@ -184,13 +155,19 @@ const Banner = styled.div`
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%)
+        transform: translate(-50%, -50%);
+
+        color: #946540;
+        font-size: 22px;
+    }
+
+    img {
+        width: 100vw;
     }
 `
 
 const Products = styled.div`
     width: 100%;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -201,37 +178,53 @@ const Products = styled.div`
 
 const Product = styled.div`
     width: calc(50% - 10px);
-    height: 230px;
+    height: auto;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
+
+    cursor: pointer;
 
     color: #946540;
 
-    .product-name{
-        font-weight: normal;
+    img{
+        width: 100%;
     }
 
-    .product-price{
-        font-weight: 700;
-    }
+    .product-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
 
-    .product-price-2{
-        font-size: 14px;
+        margin-top: 4px;
 
-        span{
-            font-weight: bold;
+        .product-name{
+            font-weight: normal;
+            text-align: center;
+        }
+
+        .product-price{
+            font-weight: 700;
+        }
+
+        .product-price-2{
+            justify-self: flex-end;
+            font-size: 14px;
+
+            span{
+                font-weight: bold;
+            }
         }
     }
 `
 
 const Footer = styled.div`
     width: 100%;
-
-    margin-left: 30px;
+    padding-left: 20px;
 
     display: flex;
     flex-direction: column;
@@ -273,6 +266,10 @@ const Footer = styled.div`
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
+
+            img {
+                width: 40px;
+            }
         }
     }
 
