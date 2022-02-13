@@ -1,15 +1,17 @@
-import { Container, Button, NavHeader } from "./Components.jsx";
-import styled from "styled-components";
-import api from "../services/api.js";
-import { useEffect, useState } from 'react'
 import Dinero from "dinero.js";
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext.js";
+import { Container, Button, NavHeader, Banners, Banner, HomeProducts, HomeProduct, Footer } from "./Components.jsx";
+import api from "../services/api.js";
 
 export default function Home() {
     // passar a categoria do produto e o id no onClick - ok
     // header não está exatamente fixo no topo, não sei o que tá rolando - ok
     // parece estar acontecendo algo estranho, se der scroll pro lado a tela se move - ok
     // context pra passar o token
+
+    const { token } = useContext(AuthContext)
 
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
@@ -24,7 +26,7 @@ export default function Home() {
     }
 
     useEffect(() => {
-        const promisse = api.getProducts()
+        const promisse = api.getProducts({ token })
         promisse.then((response) => {
             const shoes = categorizeObject(response.data[0].products.slice(0,3), "shoes")
             const shirts = categorizeObject(response.data[1].products.slice(0,3), "shirts")
@@ -72,12 +74,11 @@ export default function Home() {
                         <img src="https://picsum.photos/400/300/?blur" alt="shoes" />
                         <div className="textImage">JACKETS</div>
                     </Banner>
-                    <Products>
-                        {console.log(products)}
+                    <HomeProducts>
                         {
                             products.map(product => {
                                 return(
-                                    <Product onClick={(e) => handleClick(product.category, product.id, e)}>
+                                    <HomeProduct key={product.name} onClick={(e) => handleClick(product.category, product.id, e)}>
                                         <img src={product.url} alt={product.name} />
                                         <div className="product-info">
                                             <div className="product-name">
@@ -90,11 +91,11 @@ export default function Home() {
                                                 <span>10</span>X DE <span>{priceFormatter(product.price / 10)}</span>
                                             </div>
                                         </div>
-                                    </Product>
+                                    </HomeProduct>
                                 )
                             })
                         }
-                    </Products>
+                    </HomeProducts>
                     <Button>VER TODOS OS PRODUTOS</Button>
                     <Footer>
                         <div className="navigation">
@@ -134,160 +135,3 @@ export default function Home() {
         </>
     )
 }
-
-const Banners = styled.div`
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-
-    margin: 16px 0px;
-`
-
-const Banner = styled.div`
-    width: 100vw;
-    position: relative;
-    text-align: center;
-
-    .textImage {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        color: #946540;
-        font-size: 22px;
-    }
-
-    img {
-        width: 100vw;
-    }
-`
-
-const Products = styled.div`
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-
-    padding: 0px 10px;
-`
-
-const Product = styled.div`
-    width: calc(50% - 10px);
-    height: auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-
-    cursor: pointer;
-
-    color: #946540;
-
-    img{
-        width: 100%;
-    }
-
-    .product-info{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-
-        margin-top: 4px;
-
-        .product-name{
-            font-weight: normal;
-            text-align: center;
-        }
-
-        .product-price{
-            font-weight: 700;
-        }
-
-        .product-price-2{
-            justify-self: flex-end;
-            font-size: 14px;
-
-            span{
-                font-weight: bold;
-            }
-        }
-    }
-`
-
-const Footer = styled.div`
-    width: 100%;
-    padding-left: 20px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    .navigation{
-        margin-bottom: 20px;
-        
-        .title{
-            font-size: 14px;
-            font-weight: bold;
-            color: #64543C;
-            margin-bottom: 16px;
-        }
-        
-        .links{
-            a{
-                text-decoration: none;
-                color: #64543C;
-            }
-
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-    }
-
-    .payment-methods{
-        margin-bottom: 20px;
-        
-        .title{
-            font-size: 14px;
-            font-weight: bold;
-            color: #64543C;
-            margin-bottom: 16px;
-        }
-
-        .methods{
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-
-            img {
-                width: 40px;
-            }
-        }
-    }
-
-    .contact{
-        .title{
-            font-size: 14px;
-            font-weight: bold;
-            color: #64543C;
-            margin-bottom: 16px;
-        }
-
-        .contact-methods{
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-
-            font-size: 14px;
-            color: #64543C;
-        }
-    }
-`

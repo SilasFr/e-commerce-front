@@ -5,19 +5,22 @@ import Login from "./pages/Login.jsx";
 import Products from "./pages/Products.jsx";
 import Cart from "./pages/Cart.jsx";
 import Home from "./pages/HomePage.jsx";
+import { AuthProvider } from "./contexts/AuthContext.js";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/product" element={<Products />} />
-        <Route path="/product/:category/:id" element={<Products />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/product" element={<Products />} />
+          <Route path="/product/:category/:id" element={<Products />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
