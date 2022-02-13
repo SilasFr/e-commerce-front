@@ -49,13 +49,13 @@ const Header = styled.div`
 const Container = styled.div`
   padding-top: 60px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  background-color: #fcfcf7;
+  background-color: #fcf7f7;
 `;
 const Form = styled.form`
   width: 100%;
