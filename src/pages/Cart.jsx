@@ -8,13 +8,25 @@ export default function Cart() {
   const [cart, setCart] = useState();
 
   useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem("checkout")));
+    setCart("x");
   }, []);
+
   if (!cart) {
     return (
-      <div className="cart">
-        <p>O CARRINHO DE COMPRAS ESTÁ VAZIO</p>
-      </div>
+      <>
+        <CartHeader>
+          <ion-icon
+            name="arrow-dropleft"
+            onClick={() => {
+              navigate(-1);
+            }}
+          ></ion-icon>
+          <p>Carrinho de compras</p>
+        </CartHeader>
+        <div className="cart">
+          <p>O CARRINHO DE COMPRAS ESTÁ VAZIO</p>
+        </div>
+      </>
     );
   }
   console.log(cart);

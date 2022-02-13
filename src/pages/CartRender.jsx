@@ -1,6 +1,10 @@
 import Dinero from "dinero.js";
 
 export default function CartRender({ cart, setCart }) {
+  function handleDelete() {
+    setCart(null);
+    return;
+  }
   return (
     <div className="products">
       <div className="img">
@@ -9,7 +13,11 @@ export default function CartRender({ cart, setCart }) {
       <div className="product-info">
         <p className="product-name">
           <span>{cart.name}</span>
-          <ion-icon name="trash" className="trash-icon"></ion-icon>
+          <ion-icon
+            onClick={handleDelete}
+            name="trash"
+            className="trash-icon"
+          ></ion-icon>
         </p>
         <div className="qty-price">
           <div className="form">

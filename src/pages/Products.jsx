@@ -34,13 +34,13 @@ export default function Products() {
       alert("Selecione o tamanho primeiro!");
       return;
     }
-    const checkout = JSON.stringify({
+    const checkout = {
       ...product,
       size,
       qty,
-    });
-    localStorage.setItem("checkout", checkout);
-    navigate("/cart");
+    };
+    api.addToCart(checkout);
+    return navigate("/cart");
   }
   if (!product) {
     return <h1>Carregando</h1>;
