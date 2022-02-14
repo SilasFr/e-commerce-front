@@ -14,7 +14,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<Banner />} />
+          <Route path="/" element={<Banner />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
@@ -24,5 +24,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </AuthProvider>
-
+  );
+}
 export default App;
