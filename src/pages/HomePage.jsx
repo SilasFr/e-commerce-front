@@ -15,11 +15,6 @@ import {
 import api from "../services/api.js";
 
 export default function Home() {
-  // passar a categoria do produto e o id no onClick - ok
-  // header não está exatamente fixo no topo, não sei o que tá rolando - ok
-  // parece estar acontecendo algo estranho, se der scroll pro lado a tela se move - ok
-  // context pra passar o token
-
   const { token } = useContext(AuthContext);
 
   const [products, setProducts] = useState([]);
@@ -55,7 +50,7 @@ export default function Home() {
     promisse.catch((error) => {
       console.log(error);
     });
-  }, []);
+  }, [token]);
 
   function priceFormatter(number) {
     const price = Dinero({

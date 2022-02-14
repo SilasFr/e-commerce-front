@@ -16,7 +16,7 @@ export default function Cart() {
     promise.then((response) => {
       console.log(response);
     });
-  }, []);
+  }, [token]);
 
   if (!cart) {
     return (

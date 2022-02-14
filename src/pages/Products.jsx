@@ -11,7 +11,7 @@ export default function Products() {
   const [size, setSize] = useState("");
   const [qty, setQty] = useState(1);
   const navigate = useNavigate();
-  const { token } = useContext(AuthContext)
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     const promise = api.getSingleProduct(params, token);
@@ -21,7 +21,7 @@ export default function Products() {
     promise.catch((error) => {
       alert(error);
     });
-  }, [params]);
+  }, [params, token]);
 
   function handleSizeClick(e) {
     if (size === e.target.innerText) {
