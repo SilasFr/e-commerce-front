@@ -486,26 +486,6 @@ const ProductsRender = styled.div`
 `;
 
 
-const Banner = styled.div`
-    width: 100vw;
-    position: relative;
-    text-align: center;
-
-    .textImage {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        color: #946540;
-        font-size: 22px;
-    }
-
-    img {
-        width: 100vw;
-    }
-`
-
 const HomeProducts = styled.div`
     width: 100%;
     display: flex;
