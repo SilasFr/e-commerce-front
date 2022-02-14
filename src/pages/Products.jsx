@@ -65,10 +65,6 @@ export default function Products() {
             <div className="horizontal-divider"></div>
 
             <div className="method">
-              <p>
-                <span className="strong">3</span>X DE{" "}
-                <span className="strong">R$ 33,33</span>
-              </p>
               <div className="card-flags">
                 <span>
                   <img

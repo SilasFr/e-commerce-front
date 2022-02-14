@@ -1,26 +1,35 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import api from "../services/api";
-import { Container, NavHeader } from "./Components";
+import CategoryRender from "./CategoryRender";
+import { CatContainer, NavHeader } from "./Components";
 
 export default function Category() {
   const { category } = useParams();
+  const [products, setProducts] = useState();
 
   useEffect(() => {
     const promise = api.loadCategory(category);
     promise.then((response) => {
-      console.log(response);
+      setProducts(response);
     });
-  });
+  }, [category]);
+
+  if (!products) {
+    return <h1>Carregando</h1>;
+  }
   return (
     <>
       <NavHeader></NavHeader>
-      <Container>
-        <h1>kabhl\kshdbf</h1>
-        <h1>kabhl\kshdbf</h1>
-        <h1>kabhl\kshdbf</h1>
-        <h1>kabhl\kshdbf</h1>
-      </Container>
+      <CatContainer>
+        <div className="header">
+          <Link to="/home">
+            <span>Início / </span>
+          </Link>
+          <span className="highlight">{products.name}</span>
+        </div>
+        <CategoryRender products={products.products} category={products.name} />
+      </CatContainer>
     </>
   );
 }
