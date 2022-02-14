@@ -13,14 +13,24 @@ async function login(user) {
   return token;
 }
 
-async function getProducts() {
-  const products = await axios.get(`${BASE_URL}/products`);
+async function getProducts({ token }) {
+  const products = await axios.get(`${BASE_URL}/products`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   return products;
 }
 
-async function getSingleProduct(params) {
+async function getSingleProduct(params, token) {
   const product = await axios.get(
-    `${BASE_URL}/products/${params.category}/${params.id}`
+    `${BASE_URL}/products/${params.category}/${params.id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   return product;
 }
@@ -32,12 +42,18 @@ async function addToCart(product, token) {
   return result;
 }
 
+async function getCart(token) {
+  const result = await axios.get(`${BASE_URL}/get-cart`, token);
+  return result;
+}
+
 const api = {
   createUser,
   login,
   getProducts,
   getSingleProduct,
   addToCart,
+  getCart,
 };
 
 export default api;

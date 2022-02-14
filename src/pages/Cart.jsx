@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
+import api from "../services/api";
 import CartRender from "./CartRender";
 import { CartBody, CartHeader, Container } from "./Components";
 
 export default function Cart() {
+  const { token } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [cart, setCart] = useState();
 
   useEffect(() => {
-    setCart("x");
-  }, []);
+    const promise = api.getCart(token);
+    promise.then((response) => {
+      console.log(response);
+    });
+  }, [token]);
 
   if (!cart) {
     return (

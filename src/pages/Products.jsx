@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Container, NavHeader, Product } from "./Components";
-import api from "../services/api";
+import api from "../services/api.js";
 import { useNavigate, useParams } from "react-router-dom";
 import Dinero from "dinero.js";
+import { AuthContext } from "../contexts/AuthContext.js";
 
 export default function Products() {
   const params = useParams();
@@ -10,16 +11,17 @@ export default function Products() {
   const [size, setSize] = useState("");
   const [qty, setQty] = useState(1);
   const navigate = useNavigate();
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
-    const promise = api.getSingleProduct(params);
+    const promise = api.getSingleProduct(params, token);
     promise.then((response) => {
       setProduct(response.data);
     });
     promise.catch((error) => {
       alert(error);
     });
-  }, [params]);
+  }, [params, token]);
 
   function handleSizeClick(e) {
     if (size === e.target.innerText) {
