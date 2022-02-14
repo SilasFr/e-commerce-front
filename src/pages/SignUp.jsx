@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container, Header, Form, Input, Button } from "./Components.jsx";
+import { Container, NavHeader, Form, Input, Button } from "./Components.jsx";
 import api from "../services/api.js";
 
 export default function SignUp() {
@@ -39,10 +39,7 @@ export default function SignUp() {
   return (
     <>
       <Container>
-        <Header>
-          logo
-          <span>menu</span>
-        </Header>
+        <NavHeader></NavHeader>
         <Form>
           <Input
             value={formData.name}

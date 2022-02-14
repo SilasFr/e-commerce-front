@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext.js";
 import api from "../services/api.js";
 
-import { Container, Header, Form, Input, Button } from "./Components.jsx";
+import { Container, NavHeader, Form, Input, Button } from "./Components.jsx";
 
-export default function SignUp() {
+export default function Login() {
   const navigate = useNavigate();
+  const { setToken } = useContext(AuthContext)
 
   const [formData, setFormData] = useState({
     email: "",
@@ -16,14 +18,23 @@ export default function SignUp() {
     setFormData({ ...formData, [target.name]: target.value });
   }
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
 
     const user = { ...formData };
 
     try {
-      await api.login(user);
-      navigate("/");
+      const promisse = api.login(user);
+
+      promisse.then(response => {
+        setToken(response.data)
+        navigate("/home");
+      })
+
+      promisse.catch(error => {
+        alert(error.message)
+      })
+
     } catch (error) {
       alert("Erro, tente novamente", error);
     }
@@ -32,10 +43,7 @@ export default function SignUp() {
   return (
     <>
       <Container>
-        <Header>
-          logo
-          <span>menu</span>
-        </Header>
+        <NavHeader></NavHeader>
         <Form>
           <Input
             value={formData.email}
