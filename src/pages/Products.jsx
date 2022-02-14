@@ -32,13 +32,17 @@ export default function Products() {
   }
 
   function handleBuy() {
-    const checkout = JSON.stringify({
+    if (!size) {
+      alert("Selecione o tamanho primeiro!");
+      return;
+    }
+    const checkout = {
       ...product,
       size,
       qty,
-    });
-    localStorage.setItem(checkout);
-    navigate("/cart");
+    };
+    api.addToCart(checkout);
+    return navigate("/cart");
   }
   if (!product) {
     return <h1>Carregando</h1>;

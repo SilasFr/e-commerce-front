@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../assets/logo.png";
+import logoIcon from "../assets/transparent-icon.png";
 
 const Header = styled.div`
   width: 100%;
@@ -26,10 +26,10 @@ const Header = styled.div`
     gap: 10px;
     position: relative;
     .logo {
-      width: 40px;
+      width: 60px;
       position: absolute;
-      left: 0;
-      top: 0;
+      left: -15px;
+      top: -10px;
       img {
         width: 100%;
       }
@@ -241,6 +241,77 @@ const CartHeader = styled.div`
   }
 `;
 
+const BannerContainer = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  background-image: linear-gradient(#f8ecaa80, #ffffff8c),
+    url("https://images.unsplash.com/photo-1610652492500-ded49ceeb378?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+  background-size: cover;
+`;
+
+const CartBody = styled.div`
+  width: 100%;
+  .products {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: start;
+    .img {
+      width: 50px;
+      img {
+        width: 100%;
+      }
+    }
+    .product-info {
+      width: 75%;
+      .product-name {
+        display: flex;
+        color: #91613a;
+        font-size: 28px;
+        font-weight: 300;
+        margin-bottom: 15px;
+        span {
+          width: 90%;
+        }
+      }
+      .qty-price {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .form {
+          height: 40px;
+          display: flex;
+          input {
+            all: unset;
+            width: 40px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #91613a;
+            color: #91613a;
+            font-size: 30px;
+            font-weight: bold;
+          }
+          input.display {
+            background-color: #fff;
+            font-size: 20px;
+            font-weight: normal;
+          }
+        }
+        p {
+          color: #91613a;
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+`;
+
 function NavHeader() {
   const navigate = useNavigate();
 
@@ -248,7 +319,7 @@ function NavHeader() {
     <Header>
       <div className="nav">
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <img src={logoIcon} alt="logo" />
         </div>
         <div
           className="cart"
@@ -434,4 +505,7 @@ export {
   HomeProducts,
   HomeProduct,
   Footer,
+  CartBody,
+  BannerContainer,
+
 };
