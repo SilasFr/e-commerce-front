@@ -11,7 +11,7 @@ export default function Products() {
   const [size, setSize] = useState("");
   const [qty, setQty] = useState(1);
   const navigate = useNavigate();
-  const { token } = useContext(AuthContext)
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     const promise = api.getSingleProduct(params, token);
@@ -21,7 +21,7 @@ export default function Products() {
     promise.catch((error) => {
       alert(error);
     });
-  }, [params]);
+  }, [params, token]);
 
   function handleSizeClick(e) {
     if (size === e.target.innerText) {
@@ -32,13 +32,17 @@ export default function Products() {
   }
 
   function handleBuy() {
-    const checkout = JSON.stringify({
+    if (!size) {
+      alert("Selecione o tamanho primeiro!");
+      return;
+    }
+    const checkout = {
       ...product,
       size,
       qty,
-    });
-    localStorage.setItem(checkout);
-    navigate("/cart");
+    };
+    api.addToCart(checkout);
+    return navigate("/cart");
   }
   if (!product) {
     return <h1>Carregando</h1>;
@@ -67,10 +71,6 @@ export default function Products() {
             <div className="horizontal-divider"></div>
 
             <div className="method">
-              <p>
-                <span className="strong">3</span>X DE{" "}
-                <span className="strong">R$ 33,33</span>
-              </p>
               <div className="card-flags">
                 <span>
                   <img

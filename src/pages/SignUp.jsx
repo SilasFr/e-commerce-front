@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Container, NavHeader, Form, Input, Button } from "./Components.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import { Container, Header, Form, Input, Button } from "./Components.jsx";
+import logoIcon from "../assets/transparent-icon.png";
 import api from "../services/api.js";
 
 export default function SignUp() {
@@ -39,7 +40,24 @@ export default function SignUp() {
   return (
     <>
       <Container>
-        <NavHeader></NavHeader>
+        <Header>
+          <div className="nav">
+            <div className="logo">
+              <img
+                src={logoIcon}
+                alt="logo"
+                onClick={() => {
+                  navigate("/home");
+                }}
+              />
+            </div>
+            <ion-icon
+              name="arrow-dropleft"
+              className="return"
+              onClick={() => navigate(-1)}
+            ></ion-icon>
+          </div>
+        </Header>
         <Form>
           <Input
             value={formData.name}
@@ -73,6 +91,7 @@ export default function SignUp() {
             Cadastrar
           </Button>
         </Form>
+        <Link to="/login">Já sou cadastrado. Entrar!</Link>
       </Container>
     </>
   );
