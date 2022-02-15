@@ -34,15 +34,14 @@ const Header = styled.div`
         width: 100%;
       }
     }
+
+    ion-icon {
+      font-size: 30px;
+    }
     .cart {
       font-size: 28px;
       display: flex;
       align-items: center;
-    }
-    .menu {
-      display: flex;
-      align-items: center;
-      font-size: 30px;
     }
   }
 `;
@@ -51,12 +50,13 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   min-height: 100vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  background-color: #fcfcf7;
+  background-color: #fcf7f7;
 `;
 const Form = styled.form`
   width: 100%;
@@ -321,6 +321,11 @@ function NavHeader() {
         <div className="logo">
           <img src={logoIcon} alt="logo" />
         </div>
+        <ion-icon
+          name="arrow-dropleft"
+          className="return"
+          onClick={() => navigate(-1)}
+        ></ion-icon>
         <div
           className="cart"
           onClick={() => {
@@ -335,161 +340,225 @@ function NavHeader() {
 }
 
 const Banners = styled.div`
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
 
-    margin: 16px 0px;
-`
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  margin: 16px 0px;
+`;
 
 const Banner = styled.div`
-    width: 100vw;
-    position: relative;
-    text-align: center;
+  width: 100vw;
+  position: relative;
+  text-align: center;
 
-    .textImage {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-
-        color: #946540;
-        font-size: 22px;
-    }
-
-    img {
-        width: 100vw;
-    }
-`
-
-const HomeProducts = styled.div`
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-
-    padding: 0px 10px;
-`
-
-const HomeProduct = styled.div`
-    width: calc(50% - 10px);
-    height: auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-
-    cursor: pointer;
+  .textImage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
     color: #946540;
+    font-size: 22px;
+  }
 
-    img{
-        width: 100%;
-    }
+  img {
+    width: 100vw;
+  }
+`;
 
-    .product-info{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
+const HomeProducts = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 
-        margin-top: 4px;
+  padding: 0px 10px;
+`;
 
-        .product-name{
-            font-weight: normal;
-            text-align: center;
-        }
+const HomeProduct = styled.div`
+  width: calc(50% - 10px);
+  height: auto;
 
-        .product-price{
-            font-weight: 700;
-        }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
-        .product-price-2{
-            justify-self: flex-end;
-            font-size: 14px;
+  cursor: pointer;
 
-            span{
-                font-weight: bold;
-            }
-        }
-    }
-`
+  color: #946540;
 
-const Footer = styled.div`
+  img {
     width: 100%;
-    padding-left: 20px;
+  }
 
+  .product-info {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 
-    .navigation{
-        margin-bottom: 20px;
-        
-        .title{
-            font-size: 14px;
-            font-weight: bold;
-            color: #64543C;
-            margin-bottom: 16px;
-        }
-        
-        .links{
-            a{
-                text-decoration: none;
-                color: #64543C;
-            }
+    margin-top: 4px;
 
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+    .product-name {
+      font-weight: normal;
+      text-align: center;
     }
 
-    .payment-methods{
-        margin-bottom: 20px;
-        
-        .title{
-            font-size: 14px;
-            font-weight: bold;
-            color: #64543C;
-            margin-bottom: 16px;
-        }
-
-        .methods{
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-
-            img {
-                width: 40px;
-            }
-        }
+    .product-price {
+      font-weight: 700;
     }
 
-    .contact{
-        .title{
-            font-size: 14px;
-            font-weight: bold;
-            color: #64543C;
-            margin-bottom: 16px;
-        }
+    .product-price-2 {
+      justify-self: flex-end;
+      font-size: 14px;
 
-        .contact-methods{
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-
-            font-size: 14px;
-            color: #64543C;
-        }
+      span {
+        font-weight: bold;
+      }
     }
-`
+  }
+`;
+
+const Footer = styled.div`
+  width: 100%;
+  padding-left: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .navigation {
+    margin-bottom: 20px;
+
+    .title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #64543c;
+      margin-bottom: 16px;
+    }
+
+    .links {
+      a {
+        text-decoration: none;
+        color: #64543c;
+      }
+
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  .payment-methods {
+    margin-bottom: 20px;
+
+    .title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #64543c;
+      margin-bottom: 16px;
+    }
+
+    .methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+
+      img {
+        width: 40px;
+      }
+    }
+  }
+
+  .contact {
+    .title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #64543c;
+      margin-bottom: 16px;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      font-size: 14px;
+      color: #64543c;
+    }
+  }
+`;
+
+const CatContainer = styled.div`
+  padding: 0 15px;
+  padding-top: 70px;
+  padding-bottom: 40px;
+  width: 100%;
+  min-height: 100vh;
+  height: fit-content;
+  color: #64543c;
+  background-color: #fcf7f7;
+
+  .header {
+    margin: 10px 15px;
+    a {
+      color: inherit;
+    }
+    .highlight {
+      font-weight: bold;
+    }
+  }
+`;
+
+const ProductsRender = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  .product {
+    width: 150px;
+    height: 200px;
+    margin-bottom: 50px;
+
+    .img {
+      width: 100%;
+      height: 100%;
+      img {
+        height: 100%;
+        width: 100%;
+        min-height: 100px;
+      }
+    }
+    p {
+      text-align: center;
+      color: #64543c;
+      font-weight: 300;
+    }
+
+    .title {
+      width: 100%;
+      text-overflow: ellipsis;
+      margin: 5px 0;
+    }
+  }
+`;
+
+
+
+
 
 export {
   Container,
@@ -507,5 +576,6 @@ export {
   Footer,
   CartBody,
   BannerContainer,
-
+  CatContainer,
+  ProductsRender,
 };

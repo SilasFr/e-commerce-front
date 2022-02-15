@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
-// const BASE_URL = "https://e-commerce-sartoria-brasil.herokuapp.com";
+
+const BASE_URL = "https://e-commerce-sartoria-brasil.herokuapp.com";
 
 async function createUser(user) {
   await axios.post(`${BASE_URL}/users`, user);
@@ -35,6 +35,7 @@ async function getSingleProduct(params, token) {
   return product;
 }
 
+
 async function addToCart(product, token) {
   const result = await axios.post(`${BASE_URL}/add-to-cart`, product, {
     headers: { Authentication: `Bearer ${token}` },
@@ -45,6 +46,10 @@ async function addToCart(product, token) {
 async function getCart(token) {
   const result = await axios.get(`${BASE_URL}/get-cart`, token);
   return result;
+
+  async function loadCategory(category) {
+  const newCategory = await axios.get(`${BASE_URL}/category/${category}`);
+  return newCategory.data;
 }
 
 const api = {
@@ -54,6 +59,7 @@ const api = {
   getSingleProduct,
   addToCart,
   getCart,
+  loadCategory,
 };
 
 export default api;
