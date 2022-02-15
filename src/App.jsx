@@ -4,6 +4,7 @@ import SignUp from "./pages/SignUp.jsx";
 import Login from "./pages/Login.jsx";
 import Products from "./pages/Products.jsx";
 import Cart from "./pages/Cart.jsx";
+import Banner from "./pages/Banner.jsx";
 import Category from "./pages/Category.jsx";
 import Home from "./pages/HomePage.jsx";
 import { AuthProvider } from "./contexts/AuthContext.js";
@@ -13,6 +14,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Banner />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
@@ -24,5 +26,4 @@ function App() {
     </AuthProvider>
   );
 }
-
 export default App;
