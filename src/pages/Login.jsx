@@ -6,7 +6,6 @@ import logoIcon from "../assets/transparent-icon.png";
 
 import {
   Container,
-  NavHeader,
   Form,
   Input,
   Button,
@@ -68,7 +67,6 @@ export default function Login() {
             ></ion-icon>
           </div>
         </Header>
-        {/* <NavHeader></NavHeader> */}
         <Form>
           <Input
             value={formData.email}

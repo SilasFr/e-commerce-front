@@ -374,6 +374,8 @@ const Banner = styled.div`
   img {
     width: 100vw;
   }
+
+  
 `;
 
 const HomeProducts = styled.div`
