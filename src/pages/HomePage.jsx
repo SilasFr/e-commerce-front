@@ -84,7 +84,11 @@ export default function Home() {
               handleCategory("shoes");
             }}
           >
-            <img src="https://picsum.photos/400/300/?blur" alt="shoes" />
+            <img
+              className="shoes-banner"
+              src="https://images.unsplash.com/photo-1563434564528-8fdf5996e622?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              alt="shoes"
+            />
             <div className="textImage">SHOES</div>
           </Banner>
           <Banner
@@ -92,7 +96,11 @@ export default function Home() {
               handleCategory("shirts");
             }}
           >
-            <img src="https://picsum.photos/400/300/?blur" alt="shoes" />
+            <img
+              className="shirts-banner"
+              src="https://images.unsplash.com/photo-1603252109612-24fa03d145c8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              alt="shoes"
+            />
             <div className="textImage">SHIRTS</div>
           </Banner>
           <Banner
@@ -100,7 +108,11 @@ export default function Home() {
               handleCategory("jackets");
             }}
           >
-            <img src="https://picsum.photos/400/300/?blur" alt="shoes" />
+            <img
+              className="jackets-banner"
+              src="https://images.unsplash.com/photo-1580657018950-c7f7d6a6d990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              alt="shoes"
+            />
             <div className="textImage">JACKETS</div>
           </Banner>
           <HomeProducts>
