@@ -41,7 +41,7 @@ export default function Products() {
       size,
       qty,
     };
-    console.log(checkout);
+
     const promise = api.addToCart(checkout, token);
     promise.then((response) => {
       console.log(response.data);

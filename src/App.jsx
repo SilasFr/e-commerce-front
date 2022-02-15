@@ -8,6 +8,7 @@ import Category from "./pages/Category.jsx";
 import Banner from "./pages/Banner.jsx";
 import Home from "./pages/HomePage.jsx";
 import { AuthProvider } from "./contexts/AuthContext.js";
+import Checkout from "./pages/Checkout.jsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/:category" element={<Category />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/product/:category/:id" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>

@@ -41,12 +41,26 @@ async function addToCart(product, token) {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log("result:", result);
   return result;
 }
 
 async function getCart(token) {
-  const result = await axios.get(`${BASE_URL}/get-cart`, token);
+  const result = await axios.get(`${BASE_URL}/get-cart`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return result;
+}
+
+async function deleteCartItem(item, token) {
+  console.log(item);
+  const result = await axios.put(`${BASE_URL}/delete-cart-item`, item, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   return result;
 }
 
@@ -62,6 +76,7 @@ const api = {
   getSingleProduct,
   addToCart,
   getCart,
+  deleteCartItem,
   loadCategory,
 };
 

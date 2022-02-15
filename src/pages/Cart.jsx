@@ -14,11 +14,14 @@ export default function Cart() {
   useEffect(() => {
     const promise = api.getCart(token);
     promise.then((response) => {
-      console.log(response);
+      setCart(response.data);
     });
-  }, [token]);
+    promise.catch((error) => {
+      alert(error.response);
+    });
+  }, []);
 
-  if (!cart) {
+  if (!cart || !cart.cart || cart.cart.length === 0) {
     return (
       <>
         <CartHeader>
@@ -36,7 +39,6 @@ export default function Cart() {
       </>
     );
   }
-  console.log(cart);
   return (
     <Container>
       <CartHeader>
@@ -50,7 +52,7 @@ export default function Cart() {
       </CartHeader>
 
       <CartBody>
-        <CartRender cart={cart} setCart={setCart} />
+        <CartRender cart={cart.cart} setCart={setCart} />
       </CartBody>
     </Container>
   );
