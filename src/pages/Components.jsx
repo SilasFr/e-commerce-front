@@ -374,8 +374,6 @@ const Banner = styled.div`
   img {
     width: 100vw;
   }
-
-  
 `;
 
 const HomeProducts = styled.div`
@@ -437,6 +435,7 @@ const HomeProduct = styled.div`
 const Footer = styled.div`
   width: 100%;
   padding-left: 20px;
+  margin-top: 10px;
 
   display: flex;
   flex-direction: column;

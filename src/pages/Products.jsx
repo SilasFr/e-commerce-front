@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Button, Container, NavHeader, Product } from "./Components";
+import { Button, Container, Footer, NavHeader, Product } from "./Components";
 import api from "../services/api.js";
 import { useNavigate, useParams } from "react-router-dom";
 import Dinero from "dinero.js";
@@ -41,7 +41,14 @@ export default function Products() {
       size,
       qty,
     };
-    api.addToCart(checkout);
+    console.log(checkout);
+    const promise = api.addToCart(checkout, token);
+    promise.then((response) => {
+      console.log(response.data);
+    });
+    promise.catch((error) => {
+      console.log(error.response);
+    });
     return navigate("/cart");
   }
   if (!product) {
@@ -54,6 +61,8 @@ export default function Products() {
   })
     .toFormat("$0,0.00")
     .replace(".", ",");
+
+  console.log(token);
   return (
     <Container>
       <NavHeader></NavHeader>
@@ -138,6 +147,45 @@ export default function Products() {
           <Button onClick={handleBuy}>COMPRAR</Button>
         </div>
       </Product>
+      <Footer>
+        <div className="navigation">
+          <div className="title">
+            <p>NAVEGAÇÃO</p>
+          </div>
+
+          <div className="links">
+            <a href="/home">home</a>
+            <a href="/all-products">produtos</a>
+            <a href="/contact-us">contato</a>
+          </div>
+        </div>
+        <div className="payment-methods">
+          <div className="title">
+            <p>FORMAS DE PAGAMENTO</p>
+          </div>
+
+          <div className="methods">
+            <img
+              src="https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/visa@2x.png"
+              alt="visa"
+            />
+            <img
+              src="https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/new_logos_payment/mastercard@2x.png"
+              alt="mastercard"
+            />
+          </div>
+        </div>
+        <div className="contact">
+          <div className="title">
+            <p>CONTATO</p>
+          </div>
+          <div className="contact-methods">
+            <p>41 989876766</p>
+            <p>contato@sartoriabrasil.com</p>
+            <p>Av Sete de Setembro, 3165, Rebouças, Curitiba - PR</p>
+          </div>
+        </div>
+      </Footer>
     </Container>
   );
 }

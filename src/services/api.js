@@ -36,9 +36,12 @@ async function getSingleProduct(params, token) {
 }
 
 async function addToCart(product, token) {
-  const result = await axios.post(`${BASE_URL}/add-to-cart`, product, {
-    headers: { Authentication: `Bearer ${token}` },
-  });
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const result = await axios.post(`${BASE_URL}/add-to-cart`, product, config);
   return result;
 }
 
