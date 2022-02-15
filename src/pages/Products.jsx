@@ -31,7 +31,7 @@ export default function Products() {
     setSize(e.target.innerText);
   }
 
-  function handleBuy() {
+  async function handleBuy() {
     if (!size) {
       alert("Selecione o tamanho primeiro!");
       return;
@@ -44,12 +44,11 @@ export default function Products() {
 
     const promise = api.addToCart(checkout, token);
     promise.then((response) => {
-      console.log(response.data);
+      navigate("/cart");
     });
     promise.catch((error) => {
       console.log(error.response);
     });
-    return navigate("/cart");
   }
   if (!product) {
     return <h1>Carregando</h1>;

@@ -69,6 +69,16 @@ async function loadCategory(category) {
   return newCategory.data;
 }
 
+async function checkout(document, token) {
+  const result = axios.post(`${BASE_URL}/checkout`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return result;
+}
+
 const api = {
   createUser,
   login,
@@ -78,6 +88,7 @@ const api = {
   getCart,
   deleteCartItem,
   loadCategory,
+  checkout,
 };
 
 export default api;

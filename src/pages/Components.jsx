@@ -57,6 +57,12 @@ const Container = styled.div`
   align-items: center;
 
   background-color: #fcf7f7;
+
+  .checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
 `;
 const Form = styled.form`
   width: 100%;
@@ -562,6 +568,17 @@ const ProductsRender = styled.div`
   }
 `;
 
+const CartFooter = styled.div`
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  width: 100%;
+  height: 90px;
+`;
+
 export {
   Container,
   Header,
@@ -577,6 +594,7 @@ export {
   HomeProduct,
   Footer,
   CartBody,
+  CartFooter,
   BannerContainer,
   CatContainer,
   ProductsRender,

@@ -35,7 +35,7 @@ export default function CartRender({ cart, setCart }) {
     <>
       {cart.map((item) => {
         return (
-          <div className="products">
+          <div className="products" key={Math.random()}>
             <div className="img">
               <img src={item.url} alt={item.name} />
             </div>
